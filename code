@@ -1,0 +1,89 @@
+Appointment.php 
+<!DOCTYPE html>
+<html>
+<body>
+
+<table width="1350" height="640" border="1" ><tr>
+<td colspan="2" style="background-color:#FFF5EE;">
+<h1>HOSPITAL MANAGEMENT SYSTEM</h1>
+<h3 align="center">DOCTOR PANEL</h3>
+</td>
+</tr>
+<tr>
+<td style="background-color:#00FFFF;width:50px;height:400px;">
+<table align="center">
+<tr> <td><form action="docappointment.php" align="center">
+         <input type="submit" align="center" value="   Appointment   ">
+         </form>   </td></tr>
+<tr> <td><form action="docperscription.php" align="center">
+         <input type="submit" align="center" value="   perscription    ">
+         </form>   </td> </tr>
+<tr> <td> <form action="docoperation.php" align="center">
+         <input type="submit" align="center" value="     Operation     ">
+         </form>   </td></tr>
+<tr> <td><form action="docmedicines.php.php" align="center">
+         <input type="submit" align="center" value=" Add Medicines ">
+         </form></td></tr>
+<tr> <td> <form action="doctests.php" align="center">
+         <input type="submit" align="center" value="     Add Tests    ">
+         </form></td>
+</table>
+</td>
+<td style="background-color:#eeeeee;height:200px;width:400px;height:400px;">
+<h2 align="center"> Appointments </h2>
+ <?php
+      $host='localhost';
+      $username='root';
+      $password='';
+      $dbname='hospital';
+      $con=mysql_connect($host,$username,$password);
+      mysql_select_db($dbname);
+	    $result = mysql_query("SELECT * FROM appointment WHERE d_id='$a'");
+echo "<table border=1 align=center> <tr> <th>s.no</th> <th>pid</th> <th>name</th> <th>problem</th> <th>date</th> <th>time</th> <th>status</th> <th> update</th> </tr>";
+   
+while($row = mysql_fetch_array($result)) 
+  {
+  echo "<tr>";
+  echo "<td>" . $row['s_no'] . "</td>";    
+  echo "<td>" . $row['p_id'] . "</td>";
+  echo "<td>" . $row['name'] . "</td>";
+  echo "<td>" . $row['problem'] . "</td>";
+  echo "<td>" . $row['date_of_app'] . "</td>";
+  echo "<td>" . $row['time_of_app'] . "</td>";
+  echo "<td>" . $row['status'] . "</td>"; 
+  echo "<td>" ;?> <form action="updateappointment.php" align="center" method="POST">
+         <input type="hidden" name="sno" value=" <?php echo $row['s_no'];  ?> ">
+         <input type="hidden" name="pid" value=' <?php echo $row['p_id'];  ?> '>
+         <input type="submit" align="center" value="     update    ">
+         </form> <?php echo "<td>";
+  echo "</tr>";
+ }
+    echo "</table>";
+mysql_close($con);
+?>
+<br><br>
+<table align="center">
+   	<tr> 
+	        <td><form action="allappointment.php" align="center">
+         <input type="submit" align="center" value="   all Appointment   ">
+         </form>   </td>
+       <td><form action="pendingappointment.php" align="center">
+   <input type="submit" align="center" value="  pending Appointment    ">
+         </form>   </td>
+   <td> <form action="upcomingappointment.php" align="center">
+ <input type="submit" align="center" value="     upcoming appointment   ">
+      </form>   </td>
+ <td><form action="completedappointment.php" align="center">
+    <input type="submit" align="center" value=" completed Appointment ">
+</form></td></table>
+</td></tr>
+<tr>
+<td colspan="2" style="background-color:#9ACD32;text-align:center;"> 
+ <table align="center">  <tr> <td> Doctor name </td> <td> </td> <td> Doctor id	</td>  <td> </td> </tr> </table>
+</td></tr>
+</table>
+</body>
+</html>
+
+
+
